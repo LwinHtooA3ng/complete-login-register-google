@@ -1,0 +1,66 @@
+<!-- <h1>Register</h1>
+
+<form action="{% url 'register' %}" method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit" id="submit">Register</button>
+</form> -->
+
+{% load socialaccount %}
+
+<center>
+{% if not request.user.is_authenticated %}
+
+    <h1>Register</h1>
+    <form action="" method="POST">{% csrf_token %}
+
+        <label for="email">Email</label><br>
+        {{ form.email }} <br>
+
+        <label for="username">Username</label><br>
+        {{ form.username }} <br>
+
+        <label for="first_name">Firstname</label><br>
+        {{ form.first_name }} <br>
+
+        <label for="last_name">Lastname</label><br>
+        {{ form.last_name }} <br>
+
+        <label for="password1">Password</label><br>
+        {{ form.password1 }} <br>
+
+        <label for="password2">Confirm Password</label><br>
+        {{ form.password2 }} <br> <br>
+
+        {% if form.errors %}
+
+        {% for field in form %}
+
+        {% for error in field.errors %}
+        {{ error | escape }}
+        {% endfor %}
+
+        {% endfor %}
+
+        {% for error in form.non_field_errors %}
+        {{ error | escape }}
+        {% endfor %} <br><br>
+
+        {% endif %}
+
+
+        <p>**Password need at least 1 number, 1 Special, 1 Upper Case and 8 character.</p>
+
+        <button type="submit">Register</button>
+
+        <p>If you have already account , please <a href="/login">Login.</a></p>
+
+    </form>
+
+    <h2><a href="{% provider_login_url 'google' %}">Sign up with GOOGLE.</a></h2>
+    {% else %}
+
+    <h4 style="margin-top: 100px;">You're already logged in. Would you like to <a href="/logout/">Logout?</a> </h4>
+
+    {% endif %}
+</center>
