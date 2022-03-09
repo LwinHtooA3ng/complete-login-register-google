@@ -1,16 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <center>
-        <h1>Welcome</h1>
+{% extends 'base.html' %}
 
-        <h2><a href="/login">Login</a> | <a href="/register">Register</a></h2>
+{% block content %}
+    <center>
+        <div class="container">
+            <h1 class="display-3" style="margin-top: 150px;">Welcome</h1>
+            <a href="/login" ><button class="btn btn-primary mt-5" style="width: 400px;">I'm a Teacher</button></a><br>
+            <a><button class="btn btn-primary mt-3" style="width:400px;">I'm a Student</button> </a><br>
+            <a><button class="btn btn-primary mt-3" style="width:400px;">I'm a Family Member</button> </a>
+
+        </div>
+        
+
+        <!-- <h2><a href="/login">Login</a> | <a href="/register">Register</a></h2> -->     
+        
     </center>
-</body>
-</html>
+{% endblock %}

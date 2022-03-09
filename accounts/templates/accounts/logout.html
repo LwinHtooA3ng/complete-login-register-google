@@ -1,10 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
 
 <center>
 {% if request.user.is_authenticated %}
-<div style="margin-top: 50px;">
+<div style="margin-top: 100px;">
     <form method = "POST">{% csrf_token %}
         <p>Are you sure you want to logout?</p>
-        <button type="submit">logout</button>
+        <button class="btn btn-outline-danger" type="submit">logout</button>
     </form>
 </div>
 {% else %}
@@ -13,3 +16,5 @@
 
 {% endif %}
 </center>
+
+{% endblock %}

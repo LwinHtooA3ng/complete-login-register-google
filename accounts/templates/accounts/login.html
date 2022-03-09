@@ -1,17 +1,16 @@
-<!-- <h1>Login</h1>
+{% extends 'base.html' %}
 
-<form action="{% url 'login' %}" method="post">
-  {% csrf_token %}
-  {{ form.as_p }}
-  <button type="submit" id="submit">Login</button>
-</form> -->
+
+{% block content %}
 
 {% load socialaccount %}
 
-<center>
-    {% if not request.user.is_authenticated %}
+{% if not request.user.is_authenticated %}
+<div class="container shadow p-4 my-5 bg-body rounded" style="width: 450px;">
+
+    
     <div style="margin-top: 50px;">
-        <h1>Login</h1>
+        <h3 class="text-center mb-5">Sign In as a Teacher</h3>
 
         <form action="{% url 'login' %}" method="post">
             {% csrf_token %}
@@ -21,15 +20,40 @@
 
             <label for="password">Password</label><br>
             {{ form.password }} <br> <br>
-            <button type="submit" id="submit">Login</button>
+
+            {% if error %}
+            <p style="color: red;">{{ error }}</p>
+            {% endif %}
+
+            <button type="submit" id="submit" class="btn btn-primary">Login</button>
         </form>
-        <p>Need account , Please <a href="/register">Register</a></p>
+
     </div>
+    <h3 class="text-center text-muted my-3">or</h3>
+    <center>
+        <a href="{% provider_login_url 'google' method='oauth2' %}"><button class="btn btn-outline-secondary" style="color: black;"><img
+                    class="me-3" alt=""
+                    src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACQAAAAkCAMAAADW3miqAAAA4VBMVEVHcEzuRzrsQzfrQzXqQzXsTDHrQzXrQzXzRzjWqpjrRTbqQzXqQzXsRDb4S0PrRDbrQzXqQzXsRDfqQzXtRjb7vQb3oBH7ugb7vAX7uwb/zBH7vAX6vAXxcCL8vAXqRDdEiPRFh/f8vQZChfRNqaD7vAVDiPn/vgVGi/3LuRhDh/VDhvSBsDU0qFM3rFdDhvZChfTwvAlOqkk0qFNDhvRDhvTTuRY1qFI1qlWfsio0qFM1q1NBh+xChfQ0qFU2qFY0q1Q0qFM0qlU4nYg0qFM7r1w0qVQ0qVM9kcNChfQ1pmKDHRJiAAAAS3RSTlMAHmOi0+L3yBUCVLf/RguSh+88ljFKwaT/0g/48MljJUc/e/8I6SkzFKhmer//JlfX8MemupDY4k/C90Pl885BOY5mue0Sc8LPv7QqnV1PAAABU0lEQVR4AYzQA7LFQBRF0RPbdvLxOP/xxfYud63WxTyCpGiGZWmOInnsJoiSPIsTd4xCy6s4ZUVUTd5JF+aG5+TdpLmh941hTkbgrg2saVlTeEEgFMtYG3MgrK6OH9Flw54ZgR7M/AVQ5gaOy3ZGwXGeHzANOjNh5PtxIssUTkr9JpfNcHpbm4exfFUBBB36mdDvuj/8d8g5QQ9EHXqeoOIeunXdjYe/hhG8J/QZ+vZIqNokiyOIYRgA6usqjvkUZmbqv5+Qwsk+PWvxMMw/crCDJ0egtYgSoryXFJLUfuSaji3G1rnciHN3KqaFHZa9dt4OOe69uy8PCctfOcJtzNYR4GiF91G5R/GNcN/0EuJIEhopY2mQ6YgepfsBwXI8Iilap5yCpx4eEt8ESkZWjodUT1hwDw+dFNbYu5RJxmALM1Y59ewOh3CR7OmWpXtyttp3AzsaW+iqqRUaAAAAAElFTkSuQmCC"
+                    align="absmiddle">Teacher Sign In with Google</button></a>
+    </center>
+    <p class="mt-5 text-center">Need an account , Please <a href="/register">Register</a></p>
+    <!-- <h2><a href="{% provider_login_url 'google' %}">Login with GOOGLE.</a></h2> -->
+</div>
 
-    <h2><a href="{% provider_login_url 'google' %}">Login with GOOGLE.</a></h2>
-    {% else %}
+{% else %}
 
-    <h4 style="margin-top: 200px;">You're already logged in. Would you like to <a href="/logout/">Logout?</a> </h4>
-
-    {% endif %}
+<center>
+    <h4 style="margin-top: 100px;">You're already logged in. Would you like to <a href="/logout/">Logout?</a> </h4>
 </center>
+
+{% endif %}
+
+{% endblock %}
+
+<!-- <h1>Login</h1>
+
+<form action="{% url 'login' %}" method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit" id="submit">Login</button>
+</form> -->

@@ -1,5 +1,14 @@
-<center>
-    <h1>Home</h1>
+{% extends 'base.html' %}
 
-    <h3>Welcome {{ user.username }}</h3>
+
+{% block content %}
+<center>
+    <h1 class="mt-5 display-3">Home</h1>
+
+    <h3 class="text-muted mt-5">Welcome {{ user.username }}</h3>
+
+
+    <p class="my-5">You can logout <a href="/logout/">here.</a></p>
 </center>
+
+{% endblock %}

@@ -1,3 +1,4 @@
+from multiprocessing import context
 from django.shortcuts import render, redirect
 from django.views import generic
 from django.urls import reverse_lazy
@@ -21,24 +22,45 @@ def home(request):
 #     template_name = 'accounts/login.html'
 
 
+# def login_view(request):
+
+#     if request.method == "POST":
+#         form = AuthenticationForm(request, data = request.POST)
+#         # form = LoginForm(request.POST or None)
+
+#         if form.is_valid():
+#             user = form.get_user()
+#             login(request, user)
+#             return redirect("/home")
+#     else:
+#         form = AuthenticationForm(request)
+#         form = LoginForm(request)
+
+#     context = {
+#         "form": form
+#     }
+#     return render(request, "accounts/login.html", context)
+
+
 def login_view(request):
-
+    form = LoginForm(request.POST or None)
     if request.method == "POST":
-        form = AuthenticationForm(request, data = request.POST)
-        # form = LoginForm(request.POST or None)
+        
+        username = request.POST.get("username")
+        password = request.POST.get("password")
 
-        if form.is_valid():
-            user = form.get_user()
+        user = authenticate(request, username=username, password=password)
+        # if user is None:
+        #     context = {"error": "Invalid username or password."}
+        #     form = LoginForm()
+        #     return render(request, "accounts/login.html", context)
+        if user is not None:
             login(request, user)
             return redirect("/home")
-    else:
-        form = AuthenticationForm(request)
-        # form = LoginForm(request)
-
-    context = {
-        "form": form
-    }
-    return render(request, "accounts/login.html", context)
+        context = {"error": "Invalid username or password.", "form": LoginForm(request.POST or None)}
+        return render(request, "accounts/login.html", context)
+        f
+    return render(request, "accounts/login.html", {'form': form})
 
 # class RegisterView(generic.CreateView):
 #     form_class = RegisterForm

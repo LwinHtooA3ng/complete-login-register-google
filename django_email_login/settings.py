@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -52,12 +53,23 @@ INSTALLED_APPS = [
 
 SITE_ID = 1
 
+# SOCIALACCOUNT_PROVIDERS = {
+#     'google': {
+#         'SCOPE': [
+#             'profile',
+#             'email',
+#         ],
+#     }
+# }
+
+
 SOCIALACCOUNT_PROVIDERS = {
     'google': {
-        'SCOPE': [
-            'profile',
-            'email',
-        ],
+        'APP': {
+            'client_id': '548853160065-a9p5ad83telf0js9inm55p9cjmliccs6.apps.googleusercontent.com',
+            'secret': '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',
+            'key': ''
+        }
     }
 }
 
@@ -180,5 +192,9 @@ AUTHENTICATION_BACKENDS = ['accounts.backends.EmailBackend']
 LOGIN_REDIRECT_URL = "/home/"
 
 LOGIN_URL = "/login/"
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+] 
 
 # 127.0.0.1:8000
