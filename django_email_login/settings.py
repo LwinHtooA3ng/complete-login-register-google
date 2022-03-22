@@ -53,25 +53,25 @@ INSTALLED_APPS = [
 
 SITE_ID = 1
 
-# SOCIALACCOUNT_PROVIDERS = {
-#     'google': {
-#         'SCOPE': [
-#             'profile',
-#             'email',
-#         ],
-#     }
-# }
-
-
 SOCIALACCOUNT_PROVIDERS = {
     'google': {
-        'APP': {
-            'client_id': '548853160065-a9p5ad83telf0js9inm55p9cjmliccs6.apps.googleusercontent.com',
-            'secret': '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',
-            'key': ''
-        }
+        'SCOPE': [
+            'profile',
+            'email',
+        ],
     }
 }
+
+
+# SOCIALACCOUNT_PROVIDERS = {
+#     'google': {
+#         'APP': {
+#             'client_id': '548853160065-a9p5ad83telf0js9inm55p9cjmliccs6.apps.googleusercontent.com',
+#             'secret': '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',
+#             'key': ''
+#         }
+#     }
+# }
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -197,4 +197,5 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ] 
 
+SOCIALACCOUNT_ADAPTER = 'accounts.adapter.MySocialAccountAdapter'
 # 127.0.0.1:8000

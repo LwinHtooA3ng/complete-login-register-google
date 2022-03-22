@@ -1,16 +1,15 @@
-from multiprocessing import context
 from django.shortcuts import render, redirect
-from django.views import generic
-from django.urls import reverse_lazy
-from django.contrib.auth import views as auth_views
 from django.contrib.auth import authenticate, login , logout
 from django.contrib.auth.decorators import login_required
 from .forms import LoginForm, RegisterForm
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 
+from .models import CustomUser
 # Create your views here.
 
 def index(request):
+    all = CustomUser.objects.all()
+    print(all[1])
     return render(request, "welcome.html", {})
 
 @login_required
